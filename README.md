@@ -111,3 +111,19 @@ turn 36
 
 board is stable after 36 turns
 ```
+
+If this doesn't happen by the time the max turns is reached, then print this instead.
+```
+turn 20
+                ● ●
+          ●       ●
+        ●       ●
+        ●
+      ●   ●
+    ● ●   ●
+      ●   ●
+          ● ●
+          ● ●
+        ● ● ●
+board did not stabilise after 20 turns
+```
