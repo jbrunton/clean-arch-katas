@@ -1,4 +1,5 @@
 import { input } from "@inquirer/prompts";
+import { greet } from "../domain/usecases/greet";
 
 const main = async () => {
   const name = await input({
@@ -6,7 +7,7 @@ const main = async () => {
     default: "World",
   });
 
-  console.info(`Hello, ${name}!`);
+  greet({ name });
 };
 
 main().catch((e) => {
