@@ -3,10 +3,11 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "boundaries"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:boundaries/recommended",
     "prettier",
   ],
   overrides: [
@@ -25,5 +26,43 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  rules: {},
+  settings: {
+    "import/resolver": {
+      typescript: {
+        alwaysTryTypes: true,
+      },
+    },
+    "boundaries/elements": [
+      {
+        type: "app",
+        pattern: "src/app",
+      },
+      {
+        type: "entities",
+        pattern: "src/domain/entities",
+      },
+      {
+        type: "usecases",
+        pattern: "src/domain/usecases",
+      },
+    ],
+  },
+  rules: {
+    "boundaries/element-types": [
+      2,
+      {
+        default: "disallow",
+        rules: [
+          {
+            from: "usecases",
+            allow: ["entities"],
+          },
+          {
+            from: "app",
+            allow: ["entities", "usecases"],
+          },
+        ],
+      },
+    ],
+  },
 };
