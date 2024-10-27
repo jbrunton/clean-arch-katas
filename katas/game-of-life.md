@@ -237,3 +237,34 @@ cycle restarts
 ## Task 8: Evaluate your model
 
 Evaluate your design again. Consider the questions from task 5 above.
+
+# Saving games
+
+## Task 8: Save games
+
+Create a task which will save a game. A saved game will have a name, an optional description, and a seed state specified by the inputs to the command.
+
+A possible syntax for running the command:
+
+```bash
+$ pnpm run save-game example-game --description "Example game" --width 10 --height 10 --cell-count 80 --seed 4
+$ pnpm run save-game example-game -d "Example game" -w 10 -h 10 -c 80 -s 4
+```
+
+You should then be able to run the game by name:
+
+```bash
+$ pnpm run play --name example-game --max-turns 1000 --delay 20
+```
+
+## Task 9: List games
+
+Add a command to list the saved games:
+
+```bash
+$ pnpm run list-games
+```
+
+## Task 10: Manually setup game board
+
+When saving a game, if no seed and cell count are given, show the user a blank game board and let them specify the initial cell states. For example, you might let them use arrow keys to move around a cursor, and space to activate or deactive cells.
