@@ -2,6 +2,8 @@
 
 A kata for practicing domain-driven design / clean architecture.
 
+# Core mechanics
+
 ## Task 1: Basic rules
 
 Implement a basic console app which simulates Conway's game of life. Running the app should simulate a game in the following way:
@@ -50,9 +52,22 @@ turn 5
 
 Add the following parameters to customise the inputs:
 
-1. Height and width of the board.
-2. Max number of turns.
+1. The width and height of the game board.
+2. The max number of turns.
 3. The delay between renders in milliseconds.
+
+Hints:
+
+* You might consider using [Commander.js](https://github.com/tj/commander.js/) to parse commands.
+
+A possible syntax for running the command:
+
+```bash
+$ pnpm run play --width 10 --height 10 --max-turns 100 --delay 20
+$ pnpm run play -w 10 -h 10 -m 100 -d 20
+```
+
+# Improving the UX
 
 ## Task 3: Render cell deaths
 
@@ -88,10 +103,19 @@ turn 3
 
 Add the following parameters to customise the game setup:
 
-1. `--seed` to initialise a pseudo-random number generator.
-2. `--live-cells` to specify the number of live cells in the first turn.
+1. A seed input to initialise a pseudo-random number generator.
+2. A cell count to specify the number of live cells in the first turn.
 
 The cells should be randomly placed using the PRNG, so that each run of the program is deterministic for the given inputs.
+
+A possible syntax for running the command:
+
+```bash
+$ pnpm run play --width 10 --height 10 --cell-count 80 --max-turns 1000 --delay 20 --seed 4
+$ pnpm run play -w 10 -h 10 -c 80 -m 1000 -d 20 -s 4
+```
+
+# Detecting endgame states
 
 ## Task 5: Identify when the game has settled
 
@@ -126,4 +150,71 @@ turn 20
           ● ●
         ● ● ●
 board did not stabilise after 20 turns
+```
+
+## Task 6: Identify when the game has entered a cycle
+
+If the game doesn't settle, it will enter a cycle of two or more repeated states. When this occurs, print the cycle steps and then exit.
+
+Some example output. (Note that you won't necessarily get the same cycle for the same inputs, as that will depend on the PRNG you use and how you use it.)
+
+```
+$ pnpm run play -w 10 -h 10 -c 80 -t 1000 -d 20 -s 4
+
+turn 67
+            ● ● ●
+          ●   ●   ●
+        ● ● ●   ● ●
+        ●     ●   ●
+              ● ●
+            ● ●
+
+
+
+
+game entered cycle of length 3 at turn 61
+turn 1 of cycle
+            ● ● ●
+        ●         ●
+        ●         ●
+        ●         ●
+
+            ● ● ●
+
+
+
+
+turn 2 of cycle
+            ◌ ● ●
+        ◌ ●   ●   ●
+      ● ● ●     ● ●
+        ◌         ◌
+              ● ●
+            ◌ ● ◌
+              ●
+
+
+
+turn 3 of cycle
+            ● ● ●
+          ●   ●   ●
+      ◌ ● ● ●   ● ●
+        ●     ●   ●
+              ● ●
+            ● ●
+              ◌
+
+
+
+cycle restarts
+            ● ● ●
+        ● ◌   ◌   ●
+        ● ◌ ◌   ◌ ●
+        ●     ◌   ●
+              ◌ ◌
+            ● ● ●
+
+
+
+
 ```
