@@ -1,5 +1,5 @@
 import { input } from "@inquirer/prompts";
-import { greet } from "../domain/usecases/greet";
+import { greet } from "usecases/greet";
 
 const main = async () => {
   const name = await input({

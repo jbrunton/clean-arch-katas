@@ -1,4 +1,4 @@
-import { Subject } from "../entities/Subject";
+import { Subject } from "entities/subject";
 
 export const greet = (subject: Subject): void => {
   console.info(`Hello, ${subject.name}`);
