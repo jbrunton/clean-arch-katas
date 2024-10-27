@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . && prettier --check .",
-    "format": "prettier .",
+    "format": "prettier . --write",
     "start": "ts-node src/app/main"
   },
   "keywords": [],
