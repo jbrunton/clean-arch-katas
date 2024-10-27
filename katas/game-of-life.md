@@ -71,7 +71,7 @@ $ pnpm run play -w 10 -h 10 -m 100 -d 20
 
 ## Task 3: Render cell deaths
 
-Add an additional rendering frame between turns to animate the deaths of cells. The below examples show two frames for a single turn, with the dying cells shown first with a `◌`.
+Render an additional 'frame' between turns to animate the deaths of cells, so that changes are more obvious to the eye. The below examples show two frames for a single turn, with the dying cells shown first with a `◌`.
 ```
 turn 3
 ◌ ● ● ● ● ● ● ● ◌
@@ -115,9 +115,24 @@ $ pnpm run play --width 10 --height 10 --cell-count 80 --max-turns 1000 --delay 
 $ pnpm run play -w 10 -h 10 -c 80 -m 1000 -d 20 -s 4
 ```
 
+## Task 5: Evaluate your design
+
+Consider the design of your code:
+
+* Is the domain model clear? Have you found a suitable 'ubiquitous' language?
+* Have you cleanly separated your business logic from your I/O and the libraries/frameworks you're using?
+
+Refactor your model as appropriate.
+
+Hints:
+
+* What are the entities and value objects of the domain? Are they clearly named with clear functions/methods operating over them?
+* Should rendering be a single step (which takes a 'game' of some kind and logs it to the output), or should it be separated into separate steps: a 'render' use case (which encodes a game to a string) and a logging action to the terminal? There's no inherently correctly answer, but it's worth considering.
+* Is all your business logic simple to test?
+
 # Detecting endgame states
 
-## Task 5: Identify when the game has settled
+## Task 6: Identify when the game has settled
 
 If the board doesn't change between turns we say that the game has 'settled'. Identify when this occurs and print the number of turns it took.
 
@@ -149,10 +164,10 @@ turn 20
           ● ●
           ● ●
         ● ● ●
-board did not stabilise after 20 turns
+game ended after max (20) turns without stabilising
 ```
 
-## Task 6: Identify when the game has entered a cycle
+## Task 7: Identify when the game has entered a cycle
 
 If the game doesn't settle, it will enter a cycle of two or more repeated states. When this occurs, print the cycle steps and then exit.
 
@@ -218,3 +233,7 @@ cycle restarts
 
 
 ```
+
+## Task 8: Evaluate your model
+
+Evaluate your design again. Consider the questions from task 5 above.
