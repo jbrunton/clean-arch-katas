@@ -2,6 +2,8 @@
 
 A kata for practicing domain-driven design / clean architecture.
 
+This is different from the classic [Game of Life](https://codingdojo.org/kata/GameOfLife/) kata in scope: this kata includes additional input and rendering considerations which require adapting the model to different domains, and thus a more general model to support multiple distinct use cases.
+
 # Core mechanics
 
 ## Task 1: Basic rules
