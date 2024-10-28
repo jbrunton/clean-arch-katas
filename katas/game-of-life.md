@@ -15,11 +15,6 @@ Implement a basic console app which simulates Conway's game of life. Running the
 4. Each turn the board should be rendered to the console, with the turn number printed above. There should be a reasonable delay between renders so the turns can be watched.
 5. The game should be played for 20 turns.
 
-Hints:
-
-* You might like to clear the terminal before rendering the game. You can do this with `process.stdout.write("\u001Bc");`.
-* You might like to render each turn over the previous turn. You can reset the terminal cursor with `process.stdout.moveCursor(0, -y);` (where `y` is the number of lines to move back up the screen).
-
 Example output:
 
 ```
@@ -71,7 +66,34 @@ $ pnpm run play -w 10 -h 10 -m 100 -d 20
 
 # Improving the UX
 
-## Task 3: Render cell deaths
+## Task 3: Seed input
+
+Add the following parameters to customise the game setup:
+
+1. A seed input to initialise a pseudo-random number generator.
+2. A cell count to specify the number of live cells in the first turn.
+
+The cells should be randomly placed using the PRNG, so that each run of the program is deterministic for the given inputs.
+
+A possible syntax for running the command:
+
+```bash
+$ pnpm run play --width 10 --height 10 --cell-count 80 --max-turns 1000 --delay 20 --seed 4
+$ pnpm run play -w 10 -h 10 -c 80 -m 1000 -d 20 -s 4
+```
+
+## Task 4: Animate turns
+
+For short games, appending each turn to the terminal is fine. But for large boards / long games, this quickly becomes awkward.
+
+Add an option to animate the turns so that they happen 'in place' in the terminal. Leave the last turn only in the terminal when the program exits.
+
+Hints:
+
+* You might like to clear the terminal before rendering the game. You can do this with `process.stdout.write("\u001Bc");`.
+* You might like to render each turn over the previous turn. You can reset the terminal cursor with `process.stdout.moveCursor(0, -y);` (where `y` is the number of lines to move back up the screen).
+
+## Task 5: Render cell deaths
 
 Render an additional 'frame' between turns to animate the deaths of cells, so that changes are more obvious to the eye. The below examples show two frames for a single turn, with the dying cells shown first with a `◌`.
 ```
@@ -101,40 +123,26 @@ turn 3
 ●
 ```
 
-## Task 4: Seed input
-
-Add the following parameters to customise the game setup:
-
-1. A seed input to initialise a pseudo-random number generator.
-2. A cell count to specify the number of live cells in the first turn.
-
-The cells should be randomly placed using the PRNG, so that each run of the program is deterministic for the given inputs.
-
-A possible syntax for running the command:
-
-```bash
-$ pnpm run play --width 10 --height 10 --cell-count 80 --max-turns 1000 --delay 20 --seed 4
-$ pnpm run play -w 10 -h 10 -c 80 -m 1000 -d 20 -s 4
-```
-
-## Task 5: Evaluate your design
+## Task 6: Evaluate your design
 
 Consider the design of your code:
 
-* Is the domain model clear? Have you found a suitable 'ubiquitous' language?
+* Is the domain model clear?
+* Have you found a suitable 'ubiquitous' language?
 * Have you cleanly separated your business logic from your I/O and the libraries/frameworks you're using?
 
 Refactor your model as appropriate.
 
 Hints:
 
-* What are the entities and value objects of the domain? Are they clearly named with clear functions/methods operating over them?
-* Should rendering be a single step (which takes a 'game' of some kind and logs it to the output), or should it be separated into separate steps: a 'render' use case (which encodes a game to a string) and a logging action to the terminal? There's no inherently correctly answer, but it's worth considering.
-* Is all your business logic simple to test?
+* What are the entities and value objects of the domain?
+* Are the nouns in the ubiquitous language represented by entities/value objects, and the verbs by actions performed on these objects?
+* Should rendering be a single step (which takes a 'game' of some kind and logs it to the output), or should it be separated into separate steps: a 'render' use case (which encodes a game to a string) followed by a logging action to the terminal? (There's no inherently correctly answer, but it's worth considering.)
+* Is all your business logic simple to unit test?
 
 # Detecting endgame states
 
-## Task 6: Identify when the game has settled
+## Task 7: Identify when the game has settled
 
 If the board doesn't change between turns we say that the game has 'settled'. Identify when this occurs and print the number of turns it took.
 
@@ -150,7 +158,7 @@ turn 36
 
 
 
-board is stable after 36 turns
+board settled after 36 turns
 ```
 
 If this doesn't happen by the time the max turns is reached, then print this instead.
@@ -166,10 +174,10 @@ turn 20
           ● ●
           ● ●
         ● ● ●
-game ended after max (20) turns without stabilising
+game ended after max (20) turns without settling
 ```
 
-## Task 7: Identify when the game has entered a cycle
+## Task 8: Identify when the game has entered a cycle
 
 If the game doesn't settle, it will enter a cycle of two or more repeated states. When this occurs, print the cycle steps and then exit.
 
@@ -236,13 +244,13 @@ cycle restarts
 
 ```
 
-## Task 8: Evaluate your model
+## Task 9: Evaluate your model
 
-Evaluate your design again. Consider the questions from task 5 above.
+Evaluate your design again. Consider the questions from task 6 above.
 
 # Saving games
 
-## Task 8: Save games
+## Task 10: Save games
 
 Create a task which will save a game. A saved game will have a name, an optional description, and a seed state specified by the inputs to the command.
 
@@ -259,7 +267,7 @@ You should then be able to run the game by name:
 $ pnpm run play --name example-game --max-turns 1000 --delay 20
 ```
 
-## Task 9: List games
+## Task 11: List games
 
 Add a command to list the saved games:
 
@@ -267,6 +275,10 @@ Add a command to list the saved games:
 $ pnpm run list-games
 ```
 
-## Task 10: Manually setup game board
+## Task 12: Manually setup game board
 
-When saving a game, if no seed and cell count are given, show the user a blank game board and let them specify the initial cell states. For example, you might let them use arrow keys to move around a cursor, and space to activate or deactive cells.
+When running or saving a game, if no seed and cell count are given, show the user a blank game board and let them specify the initial cell states. For example, you might let them use arrow keys to move around a cursor, and space to activate or deactive cells.
+
+## Task 13: Evaluate your model
+
+Refactor to further clarify the domain and use cases, considering the same questions as before.
