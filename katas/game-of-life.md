@@ -11,38 +11,53 @@ This is different from the classic [Game of Life](https://codingdojo.org/kata/Ga
 Implement a basic console app which simulates Conway's game of life. Running the app should simulate a game in the following way:
 
 1. The board should be 10 x 10.
-2. The initial live cells should be those where x = 0 or y = 0 (assuming zero-based indexing for the grid).
-4. Each turn the board should be rendered to the console, with the turn number printed above. There should be a reasonable delay between renders so the turns can be watched.
-5. The game should be played for 20 turns.
+2. For now, populate the board with 15 live cells, starting from the top left corner (see turn 1 in example below).
+3. Each turn, the board should be rendered to the console, with the turn number printed above.
+4. The game should be ended after 20 turns.
+
+Hints:
+
+* If you use the `●` character, you might need to add spaces between cells or the board may look squashed horizontally.
 
 Example output:
 
 ```
 turn 1
 ● ● ● ● ● ● ● ● ● ●
-●
-●
-●
-●
-●
-●
-●
-●
-●
-```
+● ● ● ● ●
 
-```
-turn 5
-      ● ● ●
-  ●
-  ●
-●   ● ●
 
-        ●
 
+
+
+
+
+
+turn 2
+●         ● ● ● ●
+●           ● ● ●
+  ● ● ●
+
+
+
+
+
+
+
+# etc.
+
+turn 20
+        ● ● ● ●
       ●
-  ●
-●
+    ●       ● ●
+        ●   ● ●
+      ● ● ● ●
+            ●
+
+
+
+
+game ended after 20 turns
 ```
 
 ## Task 2: Game inputs
@@ -50,8 +65,8 @@ turn 5
 Add the following parameters to customise the inputs:
 
 1. The width and height of the game board.
-2. The max number of turns.
-3. The delay between renders in milliseconds.
+2. The number of cells to populate on the board (you can continue to populate them from the top left for now).
+3. The max number of turns.
 
 Hints:
 
@@ -60,8 +75,8 @@ Hints:
 A possible syntax for running the command:
 
 ```bash
-$ pnpm run play --width 10 --height 10 --max-turns 100 --delay 20
-$ pnpm run play -w 10 -h 10 -m 100 -d 20
+$ pnpm run play --width 10 --height 10 --max-turns 100 --cell-count 15 --delay 20
+$ pnpm run play -w 10 -h 10 -m 100 -c 15 -d 20
 ```
 
 # Improving the UX
@@ -86,12 +101,18 @@ $ pnpm run play -w 10 -h 10 -c 80 -m 1000 -d 20 -s 4
 
 For short games, appending each turn to the terminal is fine. But for large boards / long games, this quickly becomes awkward.
 
-Add an option to animate the turns so that they happen 'in place' in the terminal. Leave the last turn only in the terminal when the program exits.
+Add options to animate the turns so that they happen 'in place' in the terminal:
+
+1. A flag to enable animation, which will render each turn over the previous.
+2. The delay between renders in milliseconds.
+
+Leave the last turn only in the terminal when the program exits so you can see the end state.
 
 Hints:
 
-* You might like to clear the terminal before rendering the game. You can do this with `process.stdout.write("\u001Bc");`.
+* You might like to clear the terminal before rendering the game, to make the most of the terminal space. You can do this with `process.stdout.write("\u001Bc");`.
 * You might like to render each turn over the previous turn. You can reset the terminal cursor with `process.stdout.moveCursor(0, -y);` (where `y` is the number of lines to move back up the screen).
+* You might like to validate the specified width and height fit in the terminal. You can check `process.stdout.columns` and `process.stdout.rows`.
 
 ## Task 5: Render cell deaths
 
