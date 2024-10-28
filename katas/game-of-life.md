@@ -2,7 +2,7 @@
 
 A kata for practicing domain-driven design / clean architecture.
 
-This is different from the classic [Game of Life](https://codingdojo.org/kata/GameOfLife/) kata in scope: this kata includes additional input and rendering considerations which require adapting the model to different domains, and thus a more general model to support multiple distinct use cases.
+This is different from the classic [Game of Life(https://codingdojo.org/kata/GameOfLife/) TDD kata] in scope: this kata includes additional input, rendering and data storage considerations which require adapting the model to different domains, and thus a more general model to support multiple distinct use cases with different business rules.
 
 # Core mechanics
 
@@ -75,8 +75,8 @@ Hints:
 A possible syntax for running the command:
 
 ```bash
-$ pnpm run play --width 10 --height 10 --max-turns 100 --cell-count 15 --delay 20
-$ pnpm run play -w 10 -h 10 -m 100 -c 15 -d 20
+$ pnpm game play --width 10 --height 10 --max-turns 100 --cell-count 15 --delay 20
+$ pnpm game play -w 10 -h 10 -m 100 -c 15 -d 20
 ```
 
 # Improving the UX
@@ -93,8 +93,8 @@ The cells should be randomly placed using the PRNG, so that each run of the prog
 A possible syntax for running the command:
 
 ```bash
-$ pnpm run play --width 10 --height 10 --cell-count 80 --max-turns 1000 --delay 20 --seed 4
-$ pnpm run play -w 10 -h 10 -c 80 -m 1000 -d 20 -s 4
+$ pnpm game play --width 10 --height 10 --cell-count 80 --max-turns 1000 --delay 20 --seed 4
+$ pnpm game play -w 10 -h 10 -c 80 -m 1000 -d 20 -s 4
 ```
 
 ## Task 4: Animate turns
@@ -205,7 +205,7 @@ If the game doesn't settle, it will enter a cycle of two or more repeated states
 Some example output. (Note that you won't necessarily get the same cycle for the same inputs, as that will depend on the PRNG you use and how you use it.)
 
 ```
-$ pnpm run play -w 10 -h 10 -c 80 -t 1000 -d 20 -s 4
+$ pnpm game play -w 10 -h 10 -c 80 -t 1000 -d 20 -s 4
 
 turn 67
             ● ● ●
@@ -269,36 +269,67 @@ cycle restarts
 
 Evaluate your design again. Consider the questions from task 6 above.
 
-# Saving games
+# Seeding and saving games
 
-## Task 10: Save games
+## Task 10: Manually seed game
+
+When running a game, if no seed and cell count are given, show the user a blank game board and let them specify the initial cell states. For example, you might let them use arrow keys to move around a cursor, and space to activate or deactive cells.
+
+Hints:
+
+* With Node.js, you can listen for key presses with a promise like in the below snippet.
+
+```typescript
+import readline from "readline";
+
+const awaitInputs = async (onKeyPress: (keyName: string) => void) => {
+  readline.emitKeypressEvents(process.stdin);
+  process.stdin.setRawMode(true);
+
+  return new Promise<void>((resolve) => {
+    process.stdin.on("keypress", (str, key) => {
+      if (key.ctrl && key.name === "c") {
+        console.info("^C");
+        process.exit();
+      }
+      if (key.name === "return") {
+        process.stdin.setRawMode(false);
+        process.stdin.pause();
+        resolve();
+      } else {
+        onKeyPress(key.name);
+      }
+    });
+  });
+};
+```
+
+## Task 11: Save games
 
 Create a task which will save a game. A saved game will have a name, an optional description, and a seed state specified by the inputs to the command.
+
+If no cell seed or cell count are given, prompt the user to manually seed the game.
 
 A possible syntax for running the command:
 
 ```bash
-$ pnpm run save-game example-game --description "Example game" --width 10 --height 10 --cell-count 80 --seed 4
-$ pnpm run save-game example-game -d "Example game" -w 10 -h 10 -c 80 -s 4
+$ pnpm game save example-game --description "Example game" --width 10 --height 10 --cell-count 80 --seed 4
+$ pnpm game save example-game -d "Example game" -w 10 -h 10 -c 80 -s 4
 ```
 
 You should then be able to run the game by name:
 
 ```bash
-$ pnpm run play --name example-game --max-turns 1000 --delay 20
+$ pnpm game play --name example-game --max-turns 1000 --delay 20
 ```
 
-## Task 11: List games
+## Task 12: List games
 
 Add a command to list the saved games:
 
 ```bash
-$ pnpm run list-games
+$ pnpm game list
 ```
-
-## Task 12: Manually setup game board
-
-When running or saving a game, if no seed and cell count are given, show the user a blank game board and let them specify the initial cell states. For example, you might let them use arrow keys to move around a cursor, and space to activate or deactive cells.
 
 ## Task 13: Evaluate your model
 
