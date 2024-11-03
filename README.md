@@ -14,4 +14,6 @@ If you want to practice these using TypeScript, the [node-typescript-template](h
 
 ## Other references
 
-See the excellent [Curated Resources for Domain-Driven Design](https://github.com/SAP/curated-resources-for-domain-driven-design/) repo curated by SAP.
+* [Curated Resources for Domain-Driven Design](https://github.com/SAP/curated-resources-for-domain-driven-design/) by SAP.
+* [Advanced Katas](https://www.codurance.com/publications/advanced-katas) by Codurance.
+
