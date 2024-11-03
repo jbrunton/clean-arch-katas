@@ -12,7 +12,8 @@ Implement a basic console app which simulates Conway's game of life. Running the
 
 1. The board should be 10 x 10.
 2. For now, populate the board with 15 live cells, starting from the top left corner (see turn 1 in example below).
-3. Each turn, the board should be rendered to the console, with the turn number printed above.
+3. In each turn, a cell is born if it has 3 neighbors, survives if it has 2 or 3 neighbors, and otherwise dies.
+5. Each turn, the board should be rendered to the console, with the turn number printed above.
 4. The game should be ended after 20 turns.
 
 Hints:
@@ -334,3 +335,14 @@ $ pnpm game list
 ## Task 13: Evaluate your model
 
 Refactor to further clarify the domain and use cases, considering the same questions as before.
+
+# Generalising the rules
+
+## Task 14: Rule-string notation
+
+Game of Life rules can be specified using rule-string notation of `B3/S23` (a cell is born if it has 3 neighbors and survives if it has 2 or 3 neighbors). Add a rule parameter to specify rules in this notation, so that a game can be played with [Highlife](https://en.wikipedia.org/wiki/Highlife) rules 
+(`B36/S23`).
+
+## Task 15: Polystate Life
+
+Add support for the [Polystate Life](https://conwaylife.com/wiki/Polystate_Life) family of rules. Cells should be colored to distinguish between states. The number of states should be added as an option when running or seeding a game, and stored when saving a game.
