@@ -111,7 +111,7 @@ Leave the last turn only in the terminal when the program exits so you can see t
 
 Hints:
 
-* You might like to clear the terminal before rendering the game, to make the most of the terminal space. You can do this with `process.stdout.write("\u001Bc");`.
+* You might like to clear the terminal before rendering the game, to make the most of the terminal space. You can do this with `process.stdout.write("\u001Bc");` on Mac/xTerm.
 * You might like to render each turn over the previous turn. You can reset the terminal cursor with `process.stdout.moveCursor(0, -y);` (where `y` is the number of lines to move back up the screen).
 * You might like to validate the specified width and height fit in the terminal. You can check `process.stdout.columns` and `process.stdout.rows`.
 
