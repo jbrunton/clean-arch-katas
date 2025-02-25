@@ -71,7 +71,7 @@ Add the following parameters to customise the inputs:
 
 Hints:
 
-* You might consider using [Commander.js](https://github.com/tj/commander.js/) to parse commands.
+* You might consider using [Commander.js](https://github.com/tj/commander.js/) to parse commands. (The template kata repository has examples [here](https://github.com/jbrunton/clean-arch-kata-ts-template/tree/main/src/app/commands).)
 
 A possible syntax for running the command:
 
