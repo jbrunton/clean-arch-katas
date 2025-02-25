@@ -10,7 +10,7 @@ Note that, since some DDD concepts are only really applicable to large applicati
 
 ## Getting started
 
-If you want to practice these using TypeScript, the [node-typescript-template](https://github.com/jbrunton/node-typescript-template) project may be helpful.
+If you want to practice these using TypeScript, the [clean-arch-kata-ts-template](https://github.com/jbrunton/clean-arch-kata-ts-template) project may be helpful.
 
 ## Other references
 
