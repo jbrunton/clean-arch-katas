@@ -2,7 +2,7 @@
 
 A kata for practicing domain-driven design / clean architecture.
 
-This is different from the classic [Game of Life(https://codingdojo.org/kata/GameOfLife/) TDD kata] in scope: this kata includes additional input, rendering and data storage considerations which require adapting the model to different domains, and thus a more general model to support multiple distinct use cases with different business rules.
+This is different from the classic [Game of Life TDD kata](https://codingdojo.org/kata/GameOfLife/) in scope: this kata includes additional input, rendering and data storage considerations which require adapting the model to different domains, and thus a more general model to support multiple distinct use cases with different business rules.
 
 # Core mechanics
 
