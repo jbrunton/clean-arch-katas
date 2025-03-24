@@ -159,7 +159,7 @@ Hints:
 
 * What are the entities and value objects of the domain?
 * Are the nouns in the ubiquitous language represented by entities/value objects, and the verbs by actions performed on these objects?
-* Should rendering be a single step (which takes a 'game' of some kind and logs it to the output), or should it be separated into separate steps: a 'render' use case (which encodes a game to a string) followed by a logging action to the terminal? (There's no inherently correctly answer, but it's worth considering.)
+* Should rendering be a single step (which takes a 'game' of some kind and logs it to the output), or should it be separated into separate steps: a 'render' use case (which encodes a game to a string) followed by a logging action to the terminal? (There's no inherently correct answer, but it's worth considering.)
 * Is all your business logic simple to unit test?
 
 # Detecting endgame states
