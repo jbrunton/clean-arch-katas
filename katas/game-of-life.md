@@ -16,6 +16,8 @@ Implement a basic console app which simulates Conway's game of life. Running the
 5. Each turn, the board should be rendered to the console, with the turn number printed above.
 4. The game should be ended after 20 turns.
 
+Note: Conway's Game of Life is supposed to have an infinite grid, but the point of this exercise is to render the game to the terminal, which is very much finite, so we put bounds on the grid.
+
 Hints:
 
 * If you use the `●` character, you might need to add spaces between cells or the board may look squashed horizontally.
